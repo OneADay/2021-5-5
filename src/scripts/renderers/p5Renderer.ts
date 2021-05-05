@@ -60,6 +60,8 @@ export default class P5Renderer implements BaseRenderer{
         //s.background(0, 0, 0, 255);
         //s.colorMode(s.HSB);
 
+        s.noiseSeed(99);
+
         s.smooth(8);  
         s.rectMode(s.CENTER);
         s.pixelDensity(1);
@@ -102,7 +104,7 @@ export default class P5Renderer implements BaseRenderer{
 
                         let noiseAmt = 1.1;
                         let noiseScale = 0.005;
-                        let noise = (frameDelta + 2*noiseAmt - noiseAmt*s.noise(noiseScale*x+123, noiseScale*y+234, noiseScale*z+345))%1;
+                        let noise = (frameDelta + 2*noiseAmt - noiseAmt*s.sin(s.noise(noiseScale*x+123, noiseScale*y+234, noiseScale*z+345)))%1;
 
                         let remap = (s.map(noise, .25, 1, 0, 1));
                         let e = L*(1-ease(remap, s));
